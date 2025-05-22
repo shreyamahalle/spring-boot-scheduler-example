@@ -1,9 +1,11 @@
 package com.shreya.spring;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.Executor;
@@ -12,7 +14,7 @@ import java.util.concurrent.Executor;
 public class CustomScheduledTasks implements SchedulingConfigurer {
 
 	@Autowired
-	private Executor poolScheduler;
+	private ThreadPoolTaskScheduler poolScheduler;  // Use ThreadPoolTaskScheduler instead of generic Executor
 
 	@Scheduled(fixedRate = 5000)
 	public void scheduledTask() {

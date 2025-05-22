@@ -1,29 +1,18 @@
 package com.shreya.spring.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
-@EnableScheduling
-public class SchedulerConfig implements SchedulingConfigurer {
+public class SchedulerConfig {
 
     @Bean
-    public Executor taskExecutor() {
-        return Executors.newScheduledThreadPool(10);
-    }
-
-    @Override
-    public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-        taskRegistrar.setScheduler(taskExecutor());
-    }
-
-    @Bean(name = "poolScheduler")
-    public Executor poolScheduler() {
-        return Executors.newScheduledThreadPool(5);
+    public ThreadPoolTaskScheduler poolScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(5);  // set desired pool size
+        scheduler.setThreadNamePrefix("custom-scheduler-");
+        scheduler.initialize();
+        return scheduler;
     }
 }
