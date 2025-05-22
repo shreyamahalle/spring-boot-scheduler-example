@@ -1,4 +1,4 @@
-package com.shreya.spring;
+package com.shreya.spring.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,6 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.Executor;
 
 @Configuration
 public class CustomScheduledTasks implements SchedulingConfigurer {
